@@ -95,12 +95,23 @@ https://www.phoronix.com/news/Python-3.13-rc3-Released
 .. revealjs-notes::
 
    Imaginaros, que Python 3.13 se retrasó en el último minuto, por un problema de rendimiento por su recolector de
-   basura, lo cual obligó a retrasarlo una semana.
+   basura, lo cual obligó a que saliese una semana más tarde.
 
 
 
 ¿Cuánto más rápido es?
 ----------------------
+
+.. revealjs-section::
+    :data-background-color: #333333
+    :data-transition-speed: default
+    :data-transition: fade
+
+.. plotly::
+
+   import plotly.express as px
+   px.scatter(x=[0, 1, 2, 3, 4], y=[0, 1, 4, 9, 16], template="plotly_dark")
+
 
 .. revealjs-notes::
 
@@ -172,7 +183,20 @@ Python sin GIL
 
    Hacer que el intérprete de Python trabaje con concurrencia es complicado, ya que dificulta su programación, teniendo
    que coordinar los hilos para que no se pisen entre ellos. Esas comprobaciones para que funcione con varios hilos,
-   afecta al rendimiento con un solo hilo, aunque por contra es más rápido con varios hilos.
+   afecta al rendimiento con un solo hilo,
+
+
+
+Pelea entre hilos
+-----------------
+
+(gif de dos personas luchando por una misma cosa)
+
+.. revealjs-notes::
+
+   Como por ejemplo qué ocurre si dos hilos quieren acceder al mismo listado al mismo tiempo, uno para eliminar un
+   elemento y otro para leer ese mismo elemento. Esa coordinación es complicada y afecta al rendimiento, pero por
+   contra, nuestro programa podrá aprovechar todos los núcleos de la CPU.
 
 
 
@@ -226,8 +250,15 @@ Mejoras en la línea de comandos
    Pero no sólo ha habido mejoras de velocidad, ¡también han habido muchos cambios en la línea de comandos!
 
 
+
 ¡Colores!
 ---------
+
+.. revealjs-section::
+    :data-transition: concave
+    :data-background-color: #121314
+
+.. asciinema:: colors.cast
 
 .. revealjs-notes::
 
@@ -238,8 +269,14 @@ Mejoras en la línea de comandos
 Copiar y pegar más fácil
 ------------------------
 
-F2: Historial
-F3: Modo pegar
+.. revealjs-section::
+    :data-transition: concave
+    :data-background-color: #121314
+
+.. asciinema:: copypaste.cast
+
+*F2* Historial
+*F3* Modo pegar
 
 .. revealjs-notes::
 
@@ -248,10 +285,17 @@ F3: Modo pegar
    múltiples líneas cuando se recupera del historial pulsando arriba.
 
 
+
 Modo ayuda
 ----------
 
-F1: Ayuda
+.. revealjs-section::
+    :data-transition: concave
+    :data-background-color: #121314
+
+.. asciinema:: help.cast
+
+*F1* Ayuda
 
 .. revealjs-notes::
 
@@ -261,6 +305,12 @@ F1: Ayuda
 
 Funciones de línea de comandos sin paréntesis
 ---------------------------------------------
+
+.. revealjs-section::
+    :data-transition: concave
+    :data-background-color: #121314
+
+.. asciinema:: exit.cast
 
 help
 exit
@@ -478,6 +528,23 @@ Eliminaciones
 * Eliminados los descriptores tipo ``__get__`` y ``__set__`` de ``@classmethod``.
 
 
+.. revealjs-notes::
+
+   Pero no sólo se han añadido y mejorado cosas. También se han eliminado (leer). De los módulos eliminados, me
+   gustaría destacar los módulos obsoletos de stdlib y lib2to3, que nos alejan un poco más de Python 2. Demos un
+   aplauso por ello.
+
+
+
+Aplausos módulos muertos y 2to3
+-------------------------------
+
+(Imagen defunción de módulos).
+
+.. revealjs-notes::
+
+   Gracias a todos.
+
 
 Plataformas soportadas
 ======================
@@ -490,6 +557,15 @@ Plataformas soportadas
 .. revealjs-notes::
 
    También ha habido cambios en las plataformas soportadas. (Leer)
+
+
+
+Minuto de silencio
+------------------
+
+.. revealjs-notes::
+
+   Y ahora, un minuto de silencio por wasm32-emscripten, que ya no está soportado.
 
 
 
