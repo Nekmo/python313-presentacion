@@ -11,6 +11,11 @@
 ¿Qué hay de nuevo en **Python 3.13**?
 #####################################
 
+.. revealjs-section::
+    :data-background-color: #333333
+    :data-transition-speed: default
+    :data-transition: fade
+
 .. image:: images/python-logo.*
   :width: 200
 
@@ -24,9 +29,9 @@ Sobre mí **Nekmo**
 ==================
 
 .. revealjs-section::
-    :data-transition: concave
-    :data-background-color: #2b5b84
-    :data-background-gradient: linear-gradient(180deg, rgba(10,59,102,1) 0%, rgba(43,91,132,1) 30%)
+    :data-background-color: #4973ff
+    :data-transition-speed: slow
+    :data-transition: fade
 
 +------------------------------------+
 |                                    |
@@ -47,7 +52,16 @@ Sobre mí **Nekmo**
 Charlas anteriores
 ==================
 
-(imágenes de charlas anteriores)
+.. revealjs-section::
+    :data-background-color: #4973ff
+    :data-transition-speed: slow
+    :data-transition: fade
+
+.. image:: images/python311-logo.png
+    :width: 49%
+
+.. image:: images/python312-logo.png
+    :width: 49%
 
 .. revealjs-notes::
 
@@ -58,17 +72,29 @@ Charlas anteriores
 ¿Qué hay de nuevo en **Python 3.13**?
 =====================================
 
+.. revealjs-section::
+    :data-background-color: #333333
+    :data-transition-speed: default
+    :data-transition: fade
+
 .. revealjs-notes::
 
    Vamos a hablar de las novedades de Python 3.13. Y en esta ocasión vamos a hacerlo de la mano de PyData Málaga, con
-   Plytix como patrocinador.
+   Plytix como colaborador.
 
 
 
 Python Málaga + PyData Málaga
 =============================
 
-(logos Python Málaga, PyData Málaga y Plytix)
+.. image:: images/python-malaga-logo.png
+    :width: 25%
+
+.. image:: images/pydata-malaga-logo.png
+    :width: 40%
+
+.. image:: images/plytix-logo-purple.svg
+    :width: 38%
 
 .. revealjs-notes::
 
@@ -303,8 +329,8 @@ Modo ayuda
 
 
 
-Funciones de línea de comandos sin paréntesis
----------------------------------------------
+help, exit y quit sin paréntesis
+--------------------------------
 
 .. revealjs-section::
     :data-transition: concave
