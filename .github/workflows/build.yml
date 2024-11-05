@@ -1,0 +1,41 @@
+name: Build
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions: write-all
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Python 3.9
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.9'
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+      - name: Compile CSS from SCSS files
+        uses: gha-utilities/sass-build@v0.3.6
+        with:
+          source: _static/theme.scss
+          destination: _static/theme.css
+      - name: Create presentation
+        run: |
+          make revealjs
+      - name: Publish presentation
+        run: |
+          mv _build /tmp/
+          git config --global user.name 'Python 3.12 Presentacion'
+          git config --global user.email 'contacto@nekmo.com'
+          git checkout --orphan presentation
+          rm -rf * .gitignore .github
+          mv /tmp/_build/revealjs/* .
+          touch .nojekyll
+          git add --all
+          git commit -am "Updated presentation at $(date)" || echo "Already updated"
+          git push --force origin presentation
