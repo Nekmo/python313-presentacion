@@ -116,6 +116,9 @@ Python Málaga + PyData Málaga
 Python 3.13 retrasado
 ---------------------
 
+.. image:: images/phoronix.png
+    :width: 100%
+
 https://www.phoronix.com/news/Python-3.13-rc3-Released
 
 .. revealjs-notes::
@@ -125,8 +128,8 @@ https://www.phoronix.com/news/Python-3.13-rc3-Released
 
 
 
-¿Cuánto más rápido es?
-----------------------
+¿Cuánto más **rápido** es?
+--------------------------
 
 .. revealjs-section::
     :data-background-color: #333333
@@ -150,6 +153,8 @@ https://www.phoronix.com/news/Python-3.13-rc3-Released
 Muerte
 ======
 
+(gif de situación embarazosa)
+
 .. revealjs-notes::
 
    Espera, ¿cómo que ahora sin GIL es más lento? ¿Pero esto no iba a ser la releche de rápido y nos iba a salvar a
@@ -160,6 +165,11 @@ Muerte
 Ahora sin GIL
 -------------
 
+.. revealjs-section::
+    :data-background-color: #333333
+    :data-transition-speed: default
+    :data-transition: fade
+
 .. revealjs-notes::
 
    En realidad no hemos sido muy justos en este test, porque lo hemos probado con un solo hilo, donde el soporte sin
@@ -169,6 +179,8 @@ Ahora sin GIL
 
 GIL
 ---
+
+(https://www.youtube.com/watch?v=Mp6klx9oeZs)
 
 .. revealjs-notes::
 
@@ -181,7 +193,8 @@ GIL
 Cediendo el control
 -------------------
 
-https://miro.medium.com/v2/resize:fit:828/format:webp/1*wd0z1C75VsxD42QdKqCjpA.gif
+.. image:: images/gil_lock_example.gif
+    :width: 100%
 
 .. revealjs-notes::
 
@@ -193,7 +206,11 @@ https://miro.medium.com/v2/resize:fit:828/format:webp/1*wd0z1C75VsxD42QdKqCjpA.g
 Un solo núcleo
 --------------
 
-https://tenor.com/es/view/meme-gif-25244209
+.. revealjs-section::
+    :data-background-color: #333333
+    :data-background-video: _static/cpus.mp4
+    :data-background-video-loop: true
+    :data-background-size: cover
 
 .. revealjs-notes::
 
@@ -204,6 +221,11 @@ https://tenor.com/es/view/meme-gif-25244209
 
 Python sin GIL
 --------------
+
+.. revealjs-section::
+    :data-background-color: #333333
+    :data-transition-speed: default
+    :data-transition: fade
 
 .. revealjs-notes::
 
@@ -216,7 +238,11 @@ Python sin GIL
 Pelea entre hilos
 -----------------
 
-(gif de dos personas luchando por una misma cosa)
+.. revealjs-section::
+    :data-background-color: #333333
+    :data-background-video: _static/apu-homer-fight.mp4
+    :data-background-video-loop: true
+    :data-background-size: contain
 
 .. revealjs-notes::
 
@@ -229,6 +255,13 @@ Pelea entre hilos
 Python 3.13 sin GIL con hilos
 -----------------------------
 
+.. revealjs-section::
+    :data-background-color: #333333
+    :data-transition-speed: default
+    :data-transition: fade
+
+(gráfica)
+
 .. revealjs-notes::
 
    Como podemos ver aquí, ya en esta gráfica con varios hilos, Python 3.13 sin GIL es MUCHO más rápido que cualquier
@@ -240,6 +273,13 @@ Python 3.13 sin GIL con hilos
 Nuevo JIT experimental
 ======================
 
+.. revealjs-section::
+    :data-background-color: #333333
+    :data-transition-speed: default
+    :data-transition: fade
+
+(gráfica)
+
 .. revealjs-notes::
 
    Lo mismo sucede con el nuevo JIT experimental, el cual requiere compilarse con soporte para ello.
@@ -248,6 +288,11 @@ Nuevo JIT experimental
 
 Compilador Just-In-Time
 -----------------------
+
+.. revealjs-section::
+    :data-background-color: #333333
+    :data-transition-speed: default
+    :data-transition: fade
 
 .. revealjs-notes::
 
@@ -261,6 +306,13 @@ Compilador Just-In-Time
 Python 3.13 con JIT experimental
 --------------------------------
 
+.. revealjs-section::
+    :data-background-color: #333333
+    :data-transition-speed: default
+    :data-transition: fade
+
+(gráfica)
+
 .. revealjs-notes::
 
    Recuperando las gráficas de antes y ampliándolas, podéis ver que la mejora de momento es mínima. Pero podéis ir
@@ -270,6 +322,11 @@ Python 3.13 con JIT experimental
 
 Mejoras en la línea de comandos
 ===============================
+
+.. revealjs-section::
+    :data-background-color: #333333
+    :data-transition-speed: default
+    :data-transition: fade
 
 .. revealjs-notes::
 
@@ -351,6 +408,11 @@ quit
 
 Mejoras en mensajes de error
 ============================
+
+.. revealjs-section::
+    :data-background-color: #333333
+    :data-transition-speed: default
+    :data-transition: fade
 
 .. revealjs-notes::
 

@@ -36,8 +36,9 @@
 
 
 // store colors in variables
-$hotPink: #2b5b84;
-$secondaryColor: #FFD538;
+//$hotPink: #2b5b84;
+$hotPink: #FFD538;
+$secondaryColor: $hotPink;
 $sunshine: $hotPink;
 // the color of the thick border surrounding the presention
 $borderColor: $hotPink;
@@ -217,16 +218,20 @@ ul li {
 
 /* Title with shadow */
 #no-solo-funciones, #expertos-en-decoradores {
-  strong {
-    color: $secondaryColor;
-  }
-
   h2, h3 {
     font-size: 3.5em;
     text-shadow: #000000 1px 0 10px;
   }
 }
 
+/* Strong text in titles */
+.reveal {
+  h1, h2, h3, h4, h5, h6 {
+    strong {
+      color: $secondaryColor;
+    }
+  }
+}
 
 $blackComplementary: #FFD538;
 
