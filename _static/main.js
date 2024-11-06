@@ -56,31 +56,11 @@ document.addEventListener("DOMContentLoaded", function(event) {
         }
     }
 
-    /* Add hearts to the slides */
-    var starBg = document.querySelectorAll("[data-background-hash='0#f18fednullnullnullnullnull']");
+    /* Add boxes to the slides */
+    var starBg = document.querySelectorAll("[data-background-hash='0#4e54c8nullnullnullnullnull']");
     for (var i = 0; i < starBg.length; i++) {
         console.log(starBg[i]);
-        var div = addDiv(starBg[i], "hearts");
-        for (var j = 0; j < 50; j++) {
-            addDiv(div, "heart");
-        }
-    }
-
-    /* Add Django boxes to the slides */
-    var starBg = document.querySelectorAll("[data-background-hash='0#0C4B33nullnullnullnullnull']");
-    for (var i = 0; i < starBg.length; i++) {
-        console.log(starBg[i]);
-        var div = addDiv(starBg[i], "django-boxes");
-        for (var j = 0; j < 10; j++) {
-            addDiv(div, "box");
-        }
-    }
-
-    /* Add Angular boxes to the slides */
-    var starBg = document.querySelectorAll("[data-background-hash='0#7A03FDnullnullnullnullnull']");
-    for (var i = 0; i < starBg.length; i++) {
-        console.log(starBg[i]);
-        var div = addDiv(starBg[i], "angular-boxes");
+        var div = addDiv(starBg[i], "boxes");
         for (var j = 0; j < 10; j++) {
             addDiv(div, "box");
         }

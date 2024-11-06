@@ -57,6 +57,7 @@ $headingLetterSpacing: normal;
 $headingTextTransform: uppercase;
 $headingFontWeight: 700;
 $linkColor: $hotPink;
+$purpleComplementary: #C8C24E;
 $linkColorHover: lighten( $linkColor, 15% );
 $sunshineColorHover: lighten( $sunshine, 15% );
 $selectionBackgroundColor: lighten( $linkColor, 25% );
@@ -89,12 +90,12 @@ section.has-light-background {
 @import "./template.scss";
 // ---------------------------------------------
 
-.reveal *, .reveal h1, .reveal h2, .reveal h3, .reveal h4, .reveal h5, .reveal h6 {
+.reveal, .reveal h1, .reveal h2, .reveal h3, .reveal h4, .reveal h5, .reveal h6 {
   font-family: 'M PLUS 1p', sans-serif;
 }
 
-.reveal code, .ap-wrapper .ap-player.asciinema-theme-asciinema * {
-  font-family: monospace;
+.reveal .slides code, .ap-wrapper .ap-player.asciinema-theme-asciinema * {
+  font-family: monospace, SansSerif;
 }
 
 .reveal pre code {
@@ -106,8 +107,8 @@ section.has-light-background {
    	text-transform: none;
 }
 
-.reveal h2, .reveal h3 {
-  strong {
+.reveal h2, .reveal h3, .reveal p {
+  strong, code.docutils {
     color: $sunshine;
   }
 }
@@ -158,9 +159,15 @@ ul li {
 }
 
 /* Hidden titles */
-#incognito, #angular-django, #python, #django, #angular, #ejemplo-web {
+#pydata, #plytix, #qr, #python-malaga-pydata-malaga {
   h1, h2, h3 {
     display: none;
+  }
+}
+
+#python-malaga {
+  a {
+    color: #FFFFFF;
   }
 }
 
@@ -217,9 +224,8 @@ ul li {
 }
 
 /* Title with shadow */
-#no-solo-funciones, #expertos-en-decoradores {
+#gil, #un-solo-nucleo, #pelea-entre-hilos {
   h2, h3 {
-    font-size: 3.5em;
     text-shadow: #000000 1px 0 10px;
   }
 }
@@ -292,6 +298,18 @@ $blackComplementary: #FFD538;
   }
 }
 
+#gil {
+  h3 {
+    font-size: 6em;
+  }
+}
+
+#pelea-entre-hilos {
+  h3 {
+    margin-top: 50vh;
+  }
+}
+
 #colores {
   h3 {
       background: linear-gradient(90deg, rgba(255,0,0,1) 20%, rgba(0,0,255,1) 100%);
@@ -319,6 +337,56 @@ $blackComplementary: #FFD538;
     font-size: .75em;
     padding: 0 .6666666667em;
     word-break: break-word;
+  }
+}
+
+#nombre-de-parametro-equivocado {
+  h3 {
+    font-size: 2em;
+  }
+}
+
+#mejoras-en-typing, #pep-696-tipos-por-defecto-en-typevar-paramspec-y-typevartuple, #pep-702-decorador-warnings-deprecated,
+#pep-705-solo-lectura-en-typeddict, #pep-742-typeis, #pep-667-mejoras-en-locals {
+  strong {
+    color: $purpleComplementary;
+  }
+}
+
+#pep-696-tipos-por-defecto-en-typevar-paramspec-y-typevartuple {
+  h3 {
+    font-size: 1.7em;
+  }
+}
+
+#pep-702-decorador-warnings-deprecated {
+  h3 {
+    font-size: 2em;
+  }
+}
+
+#pep-705-solo-lectura-en-typeddict {
+  h3 {
+    font-size: 2.2em;
+  }
+}
+
+#pep-667-mejoras-en-locals {
+  h2 {
+      font-size: 2.4em;
+  }
+}
+
+#otros-cambios {
+  h2 {
+    font-size: 2.4em;
+  }
+}
+
+#qr {
+  img {
+      background: #ffffff;
+      box-shadow: 0 0 30px rgba(0, 0, 0, 0.55);
   }
 }
 
@@ -373,18 +441,7 @@ $blackComplementary: #FFD538;
 }
 
 
-$purpleComplementary: #C8C24E;
 
-
-#filosofia-comun, #el-framework-web-para-perfeccionistas-con-plazos-de-entrega, #caracteristicas, #administracion,
-#usuarios-y-permisos, #como-pueden-trabajar-juntos, #django-rest-framework, #formulario, #swagger, #api-doc, #id2,
-#como-se-divide, #serializers, #serializer-personalizado, #viewsets, #modelviewset, #routers,
-#como-usamos-nuestra-api-en-angular, #interfaces-en-angular, #servicios-de-angular, #angular-django-forms,
-#angular-django-tables, #donde-se-encuentra, #y-esta-presentacion {
-  strong {
-    color: $purpleComplementary;
-  }
-}
 
 #filosofia-comun {
   h2 {

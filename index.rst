@@ -49,8 +49,8 @@ Sobre mí **Nekmo**
 
 
 
-Charlas anteriores
-==================
+Charlas **anteriores**
+======================
 
 .. revealjs-section::
     :data-background-color: #4973ff
@@ -88,13 +88,13 @@ Python Málaga + PyData Málaga
 =============================
 
 .. image:: images/python-malaga-logo.png
-    :width: 25%
+    :width: 20%
 
 .. image:: images/pydata-malaga-logo.png
     :width: 40%
 
 .. image:: images/plytix-logo-purple.svg
-    :width: 38%
+    :width: 45%
 
 .. revealjs-notes::
 
@@ -103,8 +103,8 @@ Python Málaga + PyData Málaga
 
 
 
-¿Más rápido?
-============
+¿Más **rápido**?
+================
 
 .. revealjs-notes::
 
@@ -113,8 +113,13 @@ Python Málaga + PyData Málaga
 
 
 
-Python 3.13 retrasado
----------------------
+Python 3.13 **retrasado**
+-------------------------
+
+.. revealjs-section::
+    :data-background-color: #4973ff
+    :data-transition-speed: slow
+    :data-transition: fade
 
 .. image:: images/phoronix.png
     :width: 100%
@@ -138,8 +143,45 @@ https://www.phoronix.com/news/Python-3.13-rc3-Released
 
 .. plotly::
 
-   import plotly.express as px
-   px.scatter(x=[0, 1, 2, 3, 4], y=[0, 1, 4, 9, 16], template="plotly_dark")
+    import pandas as pd
+    import plotly.express as px
+
+    df_py312 = pd.read_csv('py3.12.6.csv')
+    df_py313_stock = pd.read_csv('py3.13.0-stock.csv')
+    df_py313_nogil = pd.read_csv('py3.13.0-nogil.csv')
+    df_py313_nogil.columns = ['name', 'mean_py313_nogil', 'stddev_py313_nogil']
+    df_py313_jit = pd.read_csv('py3.13.0-jit.csv')
+    df_py313_jit.columns = ['name', 'mean_py313_jit', 'stddev_py313_jit']
+
+    df_common = pd.merge(df_py312, df_py313_stock, on='name', suffixes=('_py312', '_py313_stock'))
+    df_common = pd.merge(df_common, df_py313_nogil, on='name')
+    df_common = pd.merge(df_common, df_py313_jit, on='name')
+
+    # Rename the columns
+    df_common.rename(columns={
+        'mean_py312': '3.12',
+        'mean_py313_stock': '3.13-stock',
+        'mean_py313_nogil': '3.13-nogil',
+        'mean_py313_jit': '3.13-jit'
+    }, inplace=True)
+
+    # Sum the 'mean' values for each dataset
+    sum_py312_common = df_common['3.12'].sum()
+    sum_py313_stock_common = df_common['3.13-stock'].sum()
+    sum_py313_nogil_common = df_common['3.13-nogil'].sum()
+    sum_py313_jit_common = df_common['3.13-jit'].sum()
+
+    # Create a new dataframe with the aggregated results
+    df_aggregated_common = pd.DataFrame({
+        'Dataset': ['3.12', '3.13-stock', '3.13-nogil', '3.13-jit'],
+        'Total Mean': [sum_py312_common, sum_py313_stock_common, sum_py313_nogil_common, sum_py313_jit_common]
+    })
+
+    # Create a bar plot with the aggregated results
+    fig = px.bar(df_aggregated_common, x='Dataset', y='Total Mean', barmode="group")
+
+    # Show the figure
+    fig.show()
 
 
 .. revealjs-notes::
@@ -162,8 +204,8 @@ Muerte
 
 
 
-Ahora sin GIL
--------------
+Ahora **sin GIL**
+-----------------
 
 .. revealjs-section::
     :data-background-color: #333333
@@ -180,7 +222,11 @@ Ahora sin GIL
 GIL
 ---
 
-(https://www.youtube.com/watch?v=Mp6klx9oeZs)
+.. revealjs-section::
+    :data-background-color: #333333
+    :data-background-video: _static/traffic.mp4
+    :data-background-video-loop: true
+    :data-background-size: cover
 
 .. revealjs-notes::
 
@@ -190,8 +236,8 @@ GIL
 
 
 
-Cediendo el control
--------------------
+Cediendo el **control**
+-----------------------
 
 .. image:: images/gil_lock_example.gif
     :width: 100%
@@ -203,8 +249,8 @@ Cediendo el control
 
 
 
-Un solo núcleo
---------------
+Un solo **núcleo**
+------------------
 
 .. revealjs-section::
     :data-background-color: #333333
@@ -219,8 +265,8 @@ Un solo núcleo
 
 
 
-Python sin GIL
---------------
+Python **sin GIL**
+------------------
 
 .. revealjs-section::
     :data-background-color: #333333
@@ -235,14 +281,14 @@ Python sin GIL
 
 
 
-Pelea entre hilos
------------------
+Pelea entre **hilos**
+---------------------
 
 .. revealjs-section::
     :data-background-color: #333333
     :data-background-video: _static/apu-homer-fight.mp4
     :data-background-video-loop: true
-    :data-background-size: contain
+    :data-background-size: cover
 
 .. revealjs-notes::
 
@@ -252,15 +298,34 @@ Pelea entre hilos
 
 
 
-Python 3.13 sin GIL con hilos
------------------------------
+Python 3.13 sin GIL **con hilos**
+---------------------------------
+
+.. plotly::
+
+    import plotly.graph_objects as go
+
+    fig = go.Figure(go.Bar(
+                x=[11.76, 92.57, 110.19],
+                y=['3.13-nogil', '3.13.0', '3.12.6'],
+                marker_color=['#FFD538', '#4973FF', '#4973FF'],
+                orientation='h'))
+
+    fig.update_layout(
+        title='Factorial number 24 threads (lower is better) - AMD Ryzen 9 7900',
+        xaxis_title='Execution Time (ms)',
+        yaxis_title='Python Versions',
+        yaxis=dict(
+            categoryorder='total ascending'
+        )
+    )
+
+    fig.show()
 
 .. revealjs-section::
     :data-background-color: #333333
     :data-transition-speed: default
     :data-transition: fade
-
-(gráfica)
 
 .. revealjs-notes::
 
@@ -270,15 +335,13 @@ Python 3.13 sin GIL con hilos
 
 
 
-Nuevo JIT experimental
-======================
+Nuevo **JIT experimental**
+==========================
 
 .. revealjs-section::
     :data-background-color: #333333
     :data-transition-speed: default
     :data-transition: fade
-
-(gráfica)
 
 .. revealjs-notes::
 
@@ -286,8 +349,8 @@ Nuevo JIT experimental
 
 
 
-Compilador Just-In-Time
------------------------
+Compilador **Just-In-Time**
+---------------------------
 
 .. revealjs-section::
     :data-background-color: #333333
@@ -303,15 +366,37 @@ Compilador Just-In-Time
 
 
 
-Python 3.13 con JIT experimental
---------------------------------
+Python 3.13 con **JIT experimental**
+------------------------------------
 
 .. revealjs-section::
     :data-background-color: #333333
     :data-transition-speed: default
     :data-transition: fade
 
-(gráfica)
+
+.. plotly::
+
+    import pandas as pd
+    import plotly.express as px
+
+    df_py312 = pd.read_csv('py3.13.0-stock.csv')
+    df_py312 = df_py312.loc[df_py312['name'].str.startswith('async_')]
+    df_py313_stock = pd.read_csv('py3.13.0-jit.csv')
+    df_py313_stock = df_py313_stock.loc[df_py313_stock['name'].str.startswith('async_')]
+
+    # Merge the dataframes on the 'name' column
+    df_merged = pd.merge(df_py312, df_py313_stock, on='name', suffixes=('_stock', '_jit'))
+
+    # Rename the columns
+    df_merged.rename(columns={'mean_stock': 'Stock', 'mean_jit': 'JIT'}, inplace=True)
+
+    # Create a bar plot with separate columns for each dataframe
+    fig = px.bar(df_merged, x='name', y=['Stock', 'JIT'], barmode="group", title="Comparison of Stock and JIT Means")
+
+    # Show the figure
+    fig.show()
+
 
 .. revealjs-notes::
 
@@ -320,8 +405,8 @@ Python 3.13 con JIT experimental
 
 
 
-Mejoras en la línea de comandos
-===============================
+Mejoras en la **línea de comandos**
+===================================
 
 .. revealjs-section::
     :data-background-color: #333333
@@ -349,8 +434,8 @@ Mejoras en la línea de comandos
 
 
 
-Copiar y pegar más fácil
-------------------------
+**Copiar** y **pegar** más fácil
+--------------------------------
 
 .. revealjs-section::
     :data-transition: concave
@@ -369,8 +454,8 @@ Copiar y pegar más fácil
 
 
 
-Modo ayuda
-----------
+Modo **ayuda**
+--------------
 
 .. revealjs-section::
     :data-transition: concave
@@ -386,8 +471,8 @@ Modo ayuda
 
 
 
-help, exit y quit sin paréntesis
---------------------------------
+**help**, **exit** y **quit** sin paréntesis
+--------------------------------------------
 
 .. revealjs-section::
     :data-transition: concave
@@ -406,8 +491,8 @@ quit
 
 
 
-Mejoras en mensajes de error
-============================
+Mejoras en **mensajes de error**
+================================
 
 .. revealjs-section::
     :data-background-color: #333333
@@ -420,8 +505,13 @@ Mejoras en mensajes de error
 
 
 
-Nombres de módulo ya en uso
----------------------------
+Nombres de módulo **ya en uso**
+-------------------------------
+
+.. revealjs-section::
+    :data-background-color: #4973ff
+    :data-transition-speed: slow
+    :data-transition: fade
 
 .. revealjs-code-block:: python
     :data-line-numbers:
@@ -433,9 +523,10 @@ Nombres de módulo ya en uso
       File "/home/me/random.py", line 3, in <module>
         print(random.randint(5))
               ^^^^^^^^^^^^^^
-    AttributeError: module 'random' has no attribute 'randint' (consider renaming '/home/me/random.py'
-    since it has the same name as the standard library module named 'random' and the import system
-    gives it precedence)
+    AttributeError: module 'random' has no attribute 'randint'
+    (consider renaming '/home/me/random.py' since it has the
+     same name as the standard library module named 'random'
+     and the import system gives it precedence)
 
 
 .. revealjs-notes::
@@ -445,8 +536,13 @@ Nombres de módulo ya en uso
 
 
 
-Equivocaciones en nombres de parámetros
----------------------------------------
+Nombre de parámetro **equivocado**
+----------------------------------
+
+.. revealjs-section::
+    :data-background-color: #4973ff
+    :data-transition-speed: slow
+    :data-transition: fade
 
 .. revealjs-code-block:: python
     :data-line-numbers:
@@ -456,7 +552,8 @@ Equivocaciones en nombres de parámetros
       File "<python-input-0>", line 1, in <module>
         "Better error messages!".split(max_split=1)
         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
-    TypeError: split() got an unexpected keyword argument 'max_split'. Did you mean 'maxsplit'?
+    TypeError: split() got an unexpected keyword argument
+    'max_split'. Did you mean 'maxsplit'?
 
 .. revealjs-notes::
 
@@ -464,8 +561,13 @@ Equivocaciones en nombres de parámetros
    nos sugerirá el correcto.
 
 
-Mejoras en typing
-=================
+Mejoras en **typing**
+=====================
+
+.. revealjs-section::
+    :data-background-color: #4e54c8
+    :data-transition-speed: default
+    :data-transition: slide
 
 .. revealjs-notes::
 
@@ -473,8 +575,13 @@ Mejoras en typing
 
 
 
-**PEP 696**: Tipos por defecto en TypeVar, ParamSpec y TypeVarTuple
--------------------------------------------------------------------
+**PEP 696**: Tipos por defecto en **TypeVar**, **ParamSpec** y **TypeVarTuple**
+-------------------------------------------------------------------------------
+
+.. revealjs-section::
+    :data-background-color: #4e54c8
+    :data-transition-speed: default
+    :data-transition: slide
 
 .. revealjs-code-block:: python
     :data-line-numbers:
@@ -496,8 +603,13 @@ Mejoras en typing
 
 
 
-**PEP 702**: Decorador warnings.deprecated()
---------------------------------------------
+**PEP 702**: Decorador **warnings.deprecated()**
+------------------------------------------------
+
+.. revealjs-section::
+    :data-background-color: #4e54c8
+    :data-transition-speed: default
+    :data-transition: slide
 
 .. revealjs-code-block:: python
     :data-line-numbers:
@@ -522,8 +634,13 @@ Mejoras en typing
 
 
 
-**PEP 705**: elementos de sólo lectura en TypedDict
----------------------------------------------------
+**PEP 705**: Sólo lectura en **TypedDict**
+------------------------------------------
+
+.. revealjs-section::
+    :data-background-color: #4e54c8
+    :data-transition-speed: default
+    :data-transition: slide
 
 .. revealjs-code-block:: python
     :data-line-numbers:
@@ -545,6 +662,11 @@ Mejoras en typing
 **PEP 742**: TypeIs
 -------------------
 
+.. revealjs-section::
+    :data-background-color: #4e54c8
+    :data-transition-speed: default
+    :data-transition: slide
+
 .. revealjs-code-block:: python
     :data-line-numbers:
 
@@ -561,8 +683,13 @@ Mejoras en typing
 
 
 
-**PEP 667:** Mejoras en locals()
-================================
+**PEP 667:** Mejoras en **locals()**
+====================================
+
+.. revealjs-section::
+    :data-background-color: #4973ff
+    :data-transition-speed: slow
+    :data-transition: fade
 
 .. revealjs-code-block:: python
     :data-line-numbers:
@@ -588,25 +715,36 @@ Mejoras en typing
 
 
 
-Otros cambios
-=============
+Otros **cambios**
+=================
 
-* Nueva excepción ``PythonFinalizationError``, si hay bloquos durante finalización.
+.. revealjs-section::
+    :data-background-color: #333333
+    :data-transition-speed: default
+    :data-transition: fade
+
+* Nueva excepción ``PythonFinalizationError``, si hay bloqueos durante finalización.
 * ``argparse`` ahora soporta marcar como obsoleto comandos, argumentos...
 * Soporte para codificación z85, usada por ZeroMQ o Git, en el módulo ``base64``.
 * ``copy.replace()`` copia y reemplaza del objeto copiado.
-* ``dbm.sqlite3`` ahora es el motor por defecto de ``dbm``.
-* El módulo ``os`` ahora incluye nuevas funciones *time file descriptors*.
-* El módulo ``random`` ahora incluye ***línea de comandos**.
+* El módulo ``random`` ahora incluye **línea de comandos**.
 
 .. revealjs-notes::
 
    También ha habido otros cambios, los cuales nombraremos rápidamente. (leer).
+   TODO: no cabe
+   * ``dbm.sqlite3`` ahora es el motor por defecto de ``dbm``.
+    * El módulo ``os`` ahora incluye nuevas funciones *time file descriptors*.
 
 
 
 Eliminaciones
 =============
+
+.. revealjs-section::
+    :data-background-color: #333333
+    :data-transition-speed: default
+    :data-transition: fade
 
 * Eliminación de módulos muertos de stdlib: ``aifc``, ``audioop``, ``cgi``, ``cgitb``, ``chunk``, ``crypt``...
 * Eliminado **2to3** y **lib2to3** (obsoleto desde 3.11).
@@ -627,6 +765,11 @@ Eliminaciones
 Aplausos módulos muertos y 2to3
 -------------------------------
 
+.. revealjs-section::
+    :data-background-color: #333333
+    :data-transition-speed: default
+    :data-transition: fade
+
 (Imagen defunción de módulos).
 
 .. revealjs-notes::
@@ -634,13 +777,18 @@ Aplausos módulos muertos y 2to3
    Gracias a todos.
 
 
-Plataformas soportadas
-======================
+Plataformas **soportadas**
+==========================
+
+.. revealjs-section::
+    :data-background-color: #333333
+    :data-transition-speed: default
+    :data-transition: fade
 
 * **PEP 730:** iOS está oficialmente soportado (tier 3).
 * **PEP 738:** Android está oficialmente soportado (tier 3).
-* wasm32-wasi pasa a ser tier 2.
-* wasm32-emscripten ya no está oficialmente soportado.
+* **wasm32-wasi** pasa a ser tier 2.
+* **wasm32-emscripten** ya no está oficialmente soportado.
 
 .. revealjs-notes::
 
@@ -651,14 +799,24 @@ Plataformas soportadas
 Minuto de silencio
 ------------------
 
+.. revealjs-section::
+    :data-background-color: #333333
+    :data-transition-speed: default
+    :data-transition: fade
+
 .. revealjs-notes::
 
    Y ahora, un minuto de silencio por wasm32-emscripten, que ya no está soportado.
 
 
 
-Listado completo de cambios
-===========================
+**Listado** completo de **cambios**
+===================================
+
+.. revealjs-section::
+    :data-background-color: #333333
+    :data-transition-speed: default
+    :data-transition: fade
 
 https://docs.python.org/3/whatsnew/3.13.html
 
@@ -673,12 +831,9 @@ https://docs.python.org/3/whatsnew/3.13.html
 =====================================
 
 .. revealjs-section::
-    :data-background-color: #ffffff
-    :data-background-image: _static/grid-bg.png
-    :data-background-repeat: repeat-x
-    :data-background-position: left top
-    :data-background-size: auto
-    :data-transition: zoom
+    :data-background-color: #4973ff
+    :data-transition-speed: slow
+    :data-transition: fade
 
 .. revealjs-notes::
 
@@ -700,6 +855,10 @@ https://docs.python.org/3/whatsnew/3.13.html
 PyData
 ======
 
+.. image:: images/pydata-malaga-logo.png
+    :width: 60%
+
+
 .. revealjs-notes::
 
    Y a PyData Málaga por hacer posible esta charla.
@@ -708,6 +867,9 @@ PyData
 
 Plytix
 ======
+
+.. image:: images/plytix-logo-purple.svg
+    :width: 80%
 
 .. revealjs-notes::
 
@@ -718,7 +880,8 @@ Plytix
 Pyzzas
 ======
 
-🍕
+.. image:: images/pizza.svg
+    :width: 60%
 
 .. revealjs-notes::
 
@@ -726,12 +889,19 @@ Pyzzas
 
 
 
-Python Málaga
-=============
+Python **Málaga**
+=================
+
+.. revealjs-section::
+    :data-background-color: #4973ff
+    :data-transition-speed: slow
+    :data-transition: fade
 
 * 🤝 **Meetup:** `Python Málaga <https://www.meetup.com/es-ES/Python-Malaga/>`_.
 * 🌐 **Sitio web:** `python-malaga.es <https://www.python-malaga.es/>`_.
 * 🐦 **Twitter:** `@PythonMalaga <https://twitter.com/python_malaga>`_.
+* ‍💼 **LinkedIn:** `Python Málaga <https://www.linkedin.com/groups/13110576/>`_.
+* 💬 **Telegram:** `Python Málaga <https://t.me/python_malaga>`_.
 
 .. revealjs-notes::
 
@@ -740,6 +910,14 @@ Python Málaga
 
 QR
 ==
+
+.. revealjs-section::
+    :data-background-color: #4973ff
+    :data-transition-speed: slow
+    :data-transition: fade
+
+.. image:: images/qr.svg
+    :width: 60%
 
 .. revealjs-notes::
 
@@ -751,12 +929,9 @@ QR
 -------------
 
 .. revealjs-section::
-    :data-background-color: #ffffff
-    :data-background-image: _static/grid-bg.png
-    :data-background-repeat: repeat-x
-    :data-background-position: left top
-    :data-background-size: auto
-    :data-transition: zoom
+    :data-background-color: #333333
+    :data-transition-speed: default
+    :data-transition: fade
 
 * 🌐 **Sitio web:** `nekmo.com <https://nekmo.com>`_
 * 📫 **Email:** `contacto@nekmo.com <mailto:contacto@nekmo.com>`_
