@@ -106,6 +106,12 @@ Python Málaga + PyData Málaga
 ¿Más **rápido**?
 ================
 
+.. revealjs-section::
+    :data-background-color: #333333
+    :data-background-video: _static/crash.mp4
+    :data-background-video-loop: true
+    :data-background-size: cover
+
 .. revealjs-notes::
 
    Y es que siempre que sale una nueva versión de Python, me encanta hablar de cuááánto más rápido es. Pero en esta
@@ -195,7 +201,11 @@ https://www.phoronix.com/news/Python-3.13-rc3-Released
 Muerte
 ======
 
-(gif de situación embarazosa)
+.. revealjs-section::
+    :data-background-color: #333333
+    :data-background-video: _static/sudar.mp4
+    :data-background-video-loop: true
+    :data-background-size: cover
 
 .. revealjs-notes::
 
@@ -573,6 +583,23 @@ Mejoras en **typing**
 
    Y si utilizáis typing, también ha habido varias mejoras.
 
+
+
+Regalos
+-------
+
+.. revealjs-section::
+    :data-background-color: #4e54c8
+    :data-transition-speed: default
+    :data-transition: slide
+
+
+(niños abriendo regalos)
+
+.. revealjs-code-block:: python
+
+   Como cada año, en Python nos regalan mejoras en el typing para los que nos gusta tipar, perfecto para estas
+   fechas.
 
 
 **PEP 696**: Tipos por defecto en **TypeVar**, **ParamSpec** y **TypeVarTuple**
