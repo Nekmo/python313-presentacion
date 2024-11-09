@@ -258,6 +258,92 @@ $sway-type: "sway-left-to-right", "sway-right-to-left";
 
 }
 
+/* Gray shapes */
+.gray-shapes {
+  .gray-shape {
+    position: fixed;
+
+    background-size: contain;
+    background-repeat: no-repeat;
+
+    animation-name: spin;
+    animation-duration: 50000ms;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+  }
+
+  .gray-shape:nth-child(1) {
+    top: -40vh;
+    left: -40vh;
+    width: 80vh;
+    height: 80vh;
+    background-image: url("shape1.svg");
+  }
+
+  .gray-shape:nth-child(2) {
+    bottom: -30vh;
+    left: -20vh;
+    width: 180vh;
+    height: 180vh;
+    z-index: -1;
+    background-image: url("shape2.svg");
+    animation-duration: 70000ms;
+    animation-direction: reverse;
+  }
+
+  .gray-shape:nth-child(3) {
+    bottom: -10vh;
+    right: -10vh;
+    width: 40vh;
+    height: 40vh;
+    background-image: url("shape3.svg");
+  }
+}
+
+@keyframes spin {
+    from {
+        transform:rotate(0deg);
+    }
+    to {
+        transform:rotate(360deg);
+    }
+}
+
+/* Diagonals */
+
+.diagonals {
+  .diagonal {
+    animation:slide 3s ease-in-out infinite alternate;
+    background-image: linear-gradient(-60deg, #6c3 50%, #09f 50%);
+    bottom:0;
+    left:-50%;
+    opacity:.5;
+    position:fixed;
+    right:-50%;
+    top:0;
+    z-index:-1;
+  }
+
+  .diagonal:nth-child(2) {
+    animation-direction:alternate-reverse;
+    animation-duration:4s;
+  }
+
+  .diagonal:nth-child(3) {
+    animation-duration:5s;
+  }
+
+}
+
+@keyframes slide {
+  0% {
+    transform:translateX(-25%);
+  }
+  100% {
+    transform:translateX(25%);
+  }
+}
+
 /* Colors in movement */
 div[data-background-hash="0linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);nullnullnullnull"] {
   	background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);

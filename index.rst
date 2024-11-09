@@ -87,6 +87,11 @@ Charlas **anteriores**
 Python Málaga + PyData Málaga
 =============================
 
+.. revealjs-section::
+    :data-background-color: #fcfcfc
+    :data-transition-speed: default
+    :data-transition: fade
+
 .. image:: images/python-malaga-logo.png
     :width: 20%
 
@@ -248,6 +253,11 @@ GIL
 
 Cediendo el **control**
 -----------------------
+
+.. revealjs-section::
+    :data-background-color: #fcfcfc
+    :data-transition-speed: default
+    :data-transition: fade
 
 .. image:: images/gil_lock_example.gif
     :width: 100%
@@ -589,14 +599,17 @@ Regalos
 -------
 
 .. revealjs-section::
+    :data-background-color: #333333
+    :data-background-video: _static/present.mp4
+    :data-background-video-loop: true
+    :data-background-size: cover
+
+.. revealjs-section::
     :data-background-color: #4e54c8
     :data-transition-speed: default
     :data-transition: slide
 
-
-(niños abriendo regalos)
-
-.. revealjs-code-block:: python
+.. revealjs-notes::
 
    Como cada año, en Python nos regalan mejoras en el typing para los que nos gusta tipar, perfecto para estas
    fechas.
@@ -726,10 +739,13 @@ Regalos
         sys._getframe().f_locals['x'] = 2
         print(x)  # Print 2
 
+
     def f():
         x = 1
         sys._getframe().f_locals['x'] = 2
         print(x)  # Print 1
+
+
     f()
 
 
@@ -794,10 +810,9 @@ Aplausos módulos muertos y 2to3
 
 .. revealjs-section::
     :data-background-color: #333333
-    :data-transition-speed: default
-    :data-transition: fade
-
-(Imagen defunción de módulos).
+    :data-background-video: _static/applause.mp4
+    :data-background-video-loop: true
+    :data-background-size: cover
 
 .. revealjs-notes::
 
@@ -820,20 +835,6 @@ Plataformas **soportadas**
 .. revealjs-notes::
 
    También ha habido cambios en las plataformas soportadas. (Leer)
-
-
-
-Minuto de silencio
-------------------
-
-.. revealjs-section::
-    :data-background-color: #333333
-    :data-transition-speed: default
-    :data-transition: fade
-
-.. revealjs-notes::
-
-   Y ahora, un minuto de silencio por wasm32-emscripten, que ya no está soportado.
 
 
 
@@ -882,6 +883,11 @@ https://docs.python.org/3/whatsnew/3.13.html
 PyData
 ======
 
+.. revealjs-section::
+    :data-background-color: #fcfcfc
+    :data-transition-speed: default
+    :data-transition: fade
+
 .. image:: images/pydata-malaga-logo.png
     :width: 60%
 
@@ -895,6 +901,11 @@ PyData
 Plytix
 ======
 
+.. revealjs-section::
+    :data-background-color: #fcfcfc
+    :data-transition-speed: default
+    :data-transition: fade
+
 .. image:: images/plytix-logo-purple.svg
     :width: 80%
 
@@ -906,6 +917,11 @@ Plytix
 
 Pyzzas
 ======
+
+.. revealjs-section::
+    :data-background-color: #6c36c3
+    :data-transition-speed: default
+    :data-transition: fade
 
 .. image:: images/pizza.svg
     :width: 60%
