@@ -156,9 +156,9 @@ https://www.phoronix.com/news/Python-3.13-rc3-Released
 
     import pandas as pd
     import plotly.express as px
-    import plotly_template
     import sys
     print(sys.path)
+    import plotly_template
 
     df_py312 = pd.read_csv('py3.12.6.csv')
     df_py313_stock = pd.read_csv('py3.13.0-stock.csv')
