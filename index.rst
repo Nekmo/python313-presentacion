@@ -157,6 +157,8 @@ https://www.phoronix.com/news/Python-3.13-rc3-Released
     import pandas as pd
     import plotly.express as px
     import plotly_template
+    import sys
+    print(sys.path)
 
     df_py312 = pd.read_csv('py3.12.6.csv')
     df_py313_stock = pd.read_csv('py3.13.0-stock.csv')
@@ -801,7 +803,7 @@ Otros **cambios**
    También ha habido otros cambios, los cuales nombraremos rápidamente. (leer).
    TODO: no cabe
    * ``dbm.sqlite3`` ahora es el motor por defecto de ``dbm``.
-    * El módulo ``os`` ahora incluye nuevas funciones *time file descriptors*.
+   * El módulo ``os`` ahora incluye nuevas funciones *time file descriptors*.
 
 
 
