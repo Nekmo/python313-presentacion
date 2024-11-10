@@ -353,6 +353,12 @@ $blackComplementary: #FFD538;
   }
 }
 
+#help-exit-y-quit-sin-parentesis {
+    h3 {
+      font-size: 2em;
+    }
+}
+
 .present {
   #mejoras-en-la-linea-de-comandos {
     h2 strong {
@@ -372,9 +378,19 @@ $blackComplementary: #FFD538;
   }
 }
 
+#nombres-de-modulo-ya-en-uso {
+  pre.code-wrapper {
+    font-size: 0.70em;
+  }
+}
+
 #nombre-de-parametro-equivocado {
   h3 {
     font-size: 2em;
+  }
+
+  pre.code-wrapper {
+    font-size: 0.75em;
   }
 }
 
@@ -389,11 +405,19 @@ $blackComplementary: #FFD538;
   h3 {
     font-size: 1.7em;
   }
+
+  pre.code-wrapper {
+    font-size: 0.70em;
+  }
 }
 
 #pep-702-decorador-warnings-deprecated {
   h3 {
     font-size: 2em;
+  }
+
+  pre.code-wrapper {
+    font-size: 0.65em;
   }
 }
 
@@ -401,11 +425,25 @@ $blackComplementary: #FFD538;
   h3 {
     font-size: 2.2em;
   }
+
+  pre.code-wrapper {
+    font-size: 0.75em;
+  }
+}
+
+#pep-742-typeis {
+  pre.code-wrapper {
+    font-size: 0.80em;
+  }
 }
 
 #pep-667-mejoras-en-locals {
   h2 {
       font-size: 2.4em;
+  }
+
+  pre.code-wrapper {
+    font-size: 0.75em;
   }
 }
 
