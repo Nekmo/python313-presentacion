@@ -378,7 +378,7 @@ Compilador **Just-In-Time**
 .. revealjs-section::
     :data-background-color: #333333
     :data-transition-speed: default
-    :data-transition: fade
+    :data-transition: slide
 
 .. revealjs-notes::
 
@@ -395,7 +395,7 @@ Python 3.13 con **JIT experimental**
 .. revealjs-section::
     :data-background-color: #333333
     :data-transition-speed: default
-    :data-transition: fade
+    :data-transition: slide
 
 
 .. plotly::
@@ -443,7 +443,7 @@ Mejoras en la **línea de comandos**
 .. revealjs-section::
     :data-background-color: #333333
     :data-transition-speed: default
-    :data-transition: fade
+    :data-transition: slide
 
 .. revealjs-notes::
 
@@ -455,7 +455,7 @@ Mejoras en la **línea de comandos**
 ---------
 
 .. revealjs-section::
-    :data-transition: concave
+    :data-transition: slide
     :data-background-color: #121314
 
 .. asciinema:: colors.cast
@@ -470,7 +470,7 @@ Mejoras en la **línea de comandos**
 --------------------------------
 
 .. revealjs-section::
-    :data-transition: concave
+    :data-transition: slide
     :data-background-color: #121314
 
 .. asciinema:: copypaste.cast
@@ -490,7 +490,7 @@ Modo **ayuda**
 --------------
 
 .. revealjs-section::
-    :data-transition: concave
+    :data-transition: slide
     :data-background-color: #121314
 
 .. asciinema:: help.cast
@@ -507,7 +507,7 @@ Modo **ayuda**
 --------------------------------------------
 
 .. revealjs-section::
-    :data-transition: concave
+    :data-transition: slide
     :data-background-color: #121314
 
 .. asciinema:: exit.cast
@@ -529,7 +529,7 @@ Mejoras en **mensajes de error**
 .. revealjs-section::
     :data-background-color: #333333
     :data-transition-speed: default
-    :data-transition: fade
+    :data-transition: slide
 
 .. revealjs-notes::
 
@@ -543,7 +543,7 @@ Nombres de módulo **ya en uso**
 .. revealjs-section::
     :data-background-color: #4973ff
     :data-transition-speed: slow
-    :data-transition: fade
+    :data-transition: slide
 
 .. revealjs-code-block:: bash
     :data-line-numbers: 1-11|1|2-8|9-11|
