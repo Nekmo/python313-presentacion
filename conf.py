@@ -113,6 +113,10 @@ plotly_pre_code = """
 import plotly
 import plotly.graph_objects as go
 import plotly.express as px
+import sys
+import os
+if os.getcwd() not in sys.path:
+    sys.path.append(os.getcwd())
 """
 
 # -- Options for asciinema  --------------------------------------------------

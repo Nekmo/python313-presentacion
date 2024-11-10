@@ -156,10 +156,6 @@ https://www.phoronix.com/news/Python-3.13-rc3-Released
 
     import pandas as pd
     import plotly.express as px
-    import sys
-    import os
-    print(sys.path)
-    print("cwd: ", os.getcwd())
     import plotly_template
 
     df_py312 = pd.read_csv('py3.12.6.csv')
