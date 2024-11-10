@@ -159,7 +159,7 @@ https://www.phoronix.com/news/Python-3.13-rc3-Released
     import sys
     import os
     print(sys.path)
-    print(os.getcwd())
+    print("cwd: ", os.getcwd())
     import plotly_template
 
     df_py312 = pd.read_csv('py3.12.6.csv')
