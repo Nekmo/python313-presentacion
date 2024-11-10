@@ -972,7 +972,7 @@ Python **Málaga**
 * 🤝 **Meetup:** `meetup.com/Python-Malaga <https://www.meetup.com/Python-Malaga/>`_.
 * 🐦 **Twitter:** `@python_malaga <https://twitter.com/python_malaga>`_.
 * ‍💼 **LinkedIn:** `linkedin.com/groups/13110576 <https://www.linkedin.com/groups/13110576/>`_.
-* 💬 **Telegram:** `python_malaga <https://t.me/python_malaga>`_.
+* 📱 **Telegram:** `python_malaga <https://t.me/python_malaga>`_.
 
 .. revealjs-notes::
 

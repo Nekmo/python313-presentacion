@@ -166,8 +166,13 @@ ul li {
 }
 
 #python-malaga {
+  ul li {
+    list-style: none;
+  }
+
   a {
     color: #FFFFFF;
+    font-weight: bold;
   }
 }
 
