@@ -156,6 +156,7 @@ https://www.phoronix.com/news/Python-3.13-rc3-Released
 
     import pandas as pd
     import plotly.express as px
+    import plotly_template
 
     df_py312 = pd.read_csv('py3.12.6.csv')
     df_py313_stock = pd.read_csv('py3.13.0-stock.csv')
@@ -184,12 +185,13 @@ https://www.phoronix.com/news/Python-3.13-rc3-Released
 
     # Create a new dataframe with the aggregated results
     df_aggregated_common = pd.DataFrame({
-        'Dataset': ['3.12', '3.13-stock', '3.13-nogil', '3.13-jit'],
+        'Python version': ['3.12', '3.13-stock', '3.13-nogil', '3.13-jit'],
         'Total Mean': [sum_py312_common, sum_py313_stock_common, sum_py313_nogil_common, sum_py313_jit_common]
     })
 
     # Create a bar plot with the aggregated results
-    fig = px.bar(df_aggregated_common, x='Dataset', y='Total Mean', barmode="group")
+    fig = px.bar(df_aggregated_common, x='Python version', y='Total Mean', barmode="group", template='dark-theme',
+                 title='Pyperformance tests in seconds (lower is better)')
 
     # Show the figure
     fig.show()
@@ -324,6 +326,7 @@ Python 3.13 sin GIL **con hilos**
 .. plotly::
 
     import plotly.graph_objects as go
+    import plotly_template
 
     fig = go.Figure(go.Bar(
                 x=[11.76, 92.57, 110.19],
@@ -337,7 +340,7 @@ Python 3.13 sin GIL **con hilos**
         yaxis_title='Python Versions',
         yaxis=dict(
             categoryorder='total ascending'
-        )
+        ), template='dark-theme'
     )
 
     fig.show()
@@ -399,6 +402,7 @@ Python 3.13 con **JIT experimental**
 
     import pandas as pd
     import plotly.express as px
+    import plotly_template
 
     df_py312 = pd.read_csv('py3.13.0-stock.csv')
     df_py312 = df_py312.loc[df_py312['name'].str.startswith('async_')]
@@ -407,15 +411,23 @@ Python 3.13 con **JIT experimental**
 
     # Merge the dataframes on the 'name' column
     df_merged = pd.merge(df_py312, df_py313_stock, on='name', suffixes=('_stock', '_jit'))
+    df_merged["name"] = df_merged["name"].str.replace("async_", "")
+    df_merged["name"] = df_merged["name"].str.replace("_", " ")
 
     # Rename the columns
-    df_merged.rename(columns={'mean_stock': 'Stock', 'mean_jit': 'JIT'}, inplace=True)
+    df_merged.rename(columns={'mean_stock': 'Stock', 'mean_jit': 'JIT', 'name': "Test name"}, inplace=True)
 
     # Create a bar plot with separate columns for each dataframe
-    fig = px.bar(df_merged, x='name', y=['Stock', 'JIT'], barmode="group", title="Comparison of Stock and JIT Means")
+    fig = px.bar(df_merged, x='Test name', y=['Stock', 'JIT'], barmode="group",
+                 title="Comparison of Stock and JIT means (lower is better)", template='dark-theme2')
+    fig.update_layout(
+        yaxis_title="Total mean time (s)",
+        legend_title="Python ver.",
+    )
 
     # Show the figure
     fig.show()
+
 
 
 .. revealjs-notes::
@@ -533,8 +545,8 @@ Nombres de módulo **ya en uso**
     :data-transition-speed: slow
     :data-transition: fade
 
-.. revealjs-code-block:: python
-    :data-line-numbers:
+.. revealjs-code-block:: bash
+    :data-line-numbers: 1-11|1|2-8|9-11|
 
     $ python random.py
     Traceback (most recent call last):
@@ -551,8 +563,8 @@ Nombres de módulo **ya en uso**
 
 .. revealjs-notes::
 
-   Por ejemplo, si llamamos a nuestro módulo como uno ya en uso, por ser del sistema o de un paquete instalado, y
-   tenemos un error de importación por ello, nos sugerirá que cambiemos el nombre de nuestro módulo.
+   Por ejemplo, (1) si llamamos a nuestro módulo como uno ya en uso, por ser del sistema o de un paquete instalado, (2)
+   y tenemos un error de importación por ello, (3) nos sugerirá que cambiemos el nombre de nuestro módulo.
 
 
 
@@ -565,7 +577,7 @@ Nombre de parámetro **equivocado**
     :data-transition: fade
 
 .. revealjs-code-block:: python
-    :data-line-numbers:
+    :data-line-numbers: 1-7|1| 2-7|
 
     >>> "Better error messages!".split(max_split=1)
     Traceback (most recent call last):
@@ -577,7 +589,7 @@ Nombre de parámetro **equivocado**
 
 .. revealjs-notes::
 
-   También muy útil, es que si nos equivocamos en el nombre de un parámetro, y hay uno con nombre similar,
+   También muy útil, (1) es que si nos equivocamos en el nombre de un parámetro, (2) y hay uno con nombre similar,
    nos sugerirá el correcto.
 
 
@@ -624,13 +636,15 @@ Regalos
     :data-transition: slide
 
 .. revealjs-code-block:: python
-    :data-line-numbers:
+    :data-line-numbers: 1-10|9|1|9|10|
 
     T = TypeVar("T", default=int)
+
 
     @dataclass
     class Box(Generic[T]):
         value: T | None = None
+
 
     reveal_type(Box())                      # type is Box[int]
     reveal_type(Box(value="Hello World!"))  # type is Box[str]
@@ -638,8 +652,9 @@ Regalos
 .. revealjs-notes::
 
    Tipos por defecto en TypeVar, ParamSpec y TypeVarTuple. Esto es especialmente útil para quienes usáis los genéricos.
-   Si no se define un parámetro en un genérico, ahora se puede definir un tipo por defecto, como en este ejemplo.
-   Este caso de uso es común en proyectos como NumPy o TensorFlow.
+   (1) Ahora por no ponemos parámetro en un genérico, (2) podremos definir un tipo por defecto, (3) el cual en este caso
+   será int. (4)Si lo definimos, tomará el tipo que podamos, como hasta ahora. Este caso de uso es común en proyectos
+   como NumPy o TensorFlow.
 
 
 
@@ -652,15 +667,18 @@ Regalos
     :data-transition: slide
 
 .. revealjs-code-block:: python
-    :data-line-numbers:
+    :data-line-numbers: 1-14|1|4-5|8-9|13-14|
 
     from warnings import deprecated
+
 
     @deprecated("It is pining for the fiords")
     def norwegian_blue(x: int) -> int: ...
 
+
     @deprecated("Use Spam instead")
     class Ham: ...
+
 
     class Spam:
         @deprecated("There is enough spam in the world")
@@ -668,9 +686,9 @@ Regalos
 
 .. revealjs-notes::
 
-   El nuevo decorador deprecated() de la librería warnings, nos permite marcar funciones, clases o métodos como
-   obsoletos, mostrándose por defecto un mensaje de advertencia cuando se utilizan. Adicionalmente, los validadores de
-   tipos como mypy también mostrarán una advertencia.
+   (1) El nuevo decorador deprecated() de la librería warnings, (2) nos permite marcar funciones, (3) clases
+   (4) o métodos como obsoletos, mostrándose por defecto un mensaje de advertencia cuando se utilizan. (5)
+   Adicionalmente, los validadores de tipos como mypy también mostrarán una advertencia.
 
 
 
@@ -683,19 +701,21 @@ Regalos
     :data-transition: slide
 
 .. revealjs-code-block:: python
-    :data-line-numbers:
+    :data-line-numbers: 1-6|5-6|1|
 
     from typing import NotRequired, ReadOnly, TypedDict
+
 
     class Movie(TypedDict):
         name: ReadOnly[str]
         year: ReadOnly[NotRequired[int | None]]
 
+
 .. revealjs-notes::
 
-   Esta nueva característica es especialmente útil para quienes utilicéis TypedDict, como es mi caso. Ahora es posible
-   marcar ciertas claves como de sólo lectura, en aquellos diccionarios que está previsto que sean modificados. Para
-   ello, contamos con el nuevo tipo ReadOnly.
+   Esta nueva característica es especialmente útil para quienes utilizáis TypedDict, como es mi caso. (1) Ahora es
+   posible marcar ciertas claves como de sólo lectura, en aquellos diccionarios que está previsto que sean modificados.
+   (3) Para ello, contamos con el nuevo tipo ReadOnly.
 
 
 
@@ -708,16 +728,17 @@ Regalos
     :data-transition: slide
 
 .. revealjs-code-block:: python
-    :data-line-numbers:
+    :data-line-numbers: 1-5|1|4-5
 
     from typing import TypeIs
+
 
     def is_int(x: object) -> TypeIs[int]:
         return isinstance(x, int)
 
 .. revealjs-notes::
 
-   Por último, tenemos TypeIs. Este caso es bastante específico, siendo una alternativa a TypeGuard. Es útil en
+   (1) Por último, tenemos TypeIs. Este caso es bastante específico, siendo una alternativa a TypeGuard. (2) Es útil en
    funciones que devuelven True o False en función a un tipo. Si el objeto que pasamos a la función es igual al tipo
    que ponemos dentro del TypeIs, será True. Si no, será False. Así de simple.
 
@@ -732,7 +753,7 @@ Regalos
     :data-transition: fade
 
 .. revealjs-code-block:: python
-    :data-line-numbers:
+    :data-line-numbers: 1-13|1-4|7-10|
 
     class C:
         x = 1
@@ -752,8 +773,9 @@ Regalos
 .. revealjs-notes::
 
    Pasando a otro tema, también ha habido cambios importantes en locals(). Hasta ahora, el locals() se obtenía en
-   tiempo real, y su modificación podía tener efectos indeseados. No sólo esto, sino que también era bastante lento.
-   Ahora se ha cambiado su implementación, haciéndolo más consistente y rápido. Para los usuarios finales no tendrá
+   tiempo real, y su modificación podía tener efectos indeseados. (1) Por ejemplo, sobrescribir el local desde el
+   contexto de una clase funcionaba, (2) pero no desde una función. No sólo esto, sino que también era bastante lento.
+   (3) Ahora se ha cambiado su implementación, haciéndolo más consistente y rápido. Para los usuarios finales no tendrá
    implicaciones, pero para quienes usen la API en C, supone utilizar nuevas llamadas.
 
 
@@ -766,11 +788,13 @@ Otros **cambios**
     :data-transition-speed: default
     :data-transition: fade
 
-* Nueva excepción ``PythonFinalizationError``, si hay bloqueos durante finalización.
-* ``argparse`` ahora soporta marcar como obsoleto comandos, argumentos...
-* Soporte para codificación z85, usada por ZeroMQ o Git, en el módulo ``base64``.
-* ``copy.replace()`` copia y reemplaza del objeto copiado.
-* El módulo ``random`` ahora incluye **línea de comandos**.
+.. revealjs-fragments::
+
+    * Nueva excepción ``PythonFinalizationError``, si hay bloqueos durante finalización.
+    * ``argparse`` ahora soporta marcar como obsoleto comandos, argumentos...
+    * Soporte para codificación z85, usada por ZeroMQ o Git, en el módulo ``base64``.
+    * ``copy.replace()`` copia y reemplaza del objeto copiado.
+    * El módulo ``random`` ahora incluye **línea de comandos**.
 
 .. revealjs-notes::
 
@@ -789,12 +813,14 @@ Eliminaciones
     :data-transition-speed: default
     :data-transition: fade
 
-* Eliminación de módulos muertos de stdlib: ``aifc``, ``audioop``, ``cgi``, ``cgitb``, ``chunk``, ``crypt``...
-* Eliminado **2to3** y **lib2to3** (obsoleto desde 3.11).
-* Eliminado ``tkinter.tix`` (obsoleto desde 3.6).
-* Eliminada ``locale.resetlocale()``
-* Eliminados ``typing.io`` y ``typing.re``.
-* Eliminados los descriptores tipo ``__get__`` y ``__set__`` de ``@classmethod``.
+.. revealjs-fragments::
+
+    * Eliminación de módulos muertos de stdlib: ``aifc``, ``audioop``, ``cgi``, ``cgitb``, ``chunk``, ``crypt``...
+    * Eliminado **2to3** y **lib2to3** (obsoleto desde 3.11).
+    * Eliminado ``tkinter.tix`` (obsoleto desde 3.6).
+    * Eliminada ``locale.resetlocale()``
+    * Eliminados ``typing.io`` y ``typing.re``.
+    * Eliminados los descriptores tipo ``__get__`` y ``__set__`` de ``@classmethod``.
 
 
 .. revealjs-notes::
@@ -827,10 +853,12 @@ Plataformas **soportadas**
     :data-transition-speed: default
     :data-transition: fade
 
-* **PEP 730:** iOS está oficialmente soportado (tier 3).
-* **PEP 738:** Android está oficialmente soportado (tier 3).
-* **wasm32-wasi** pasa a ser tier 2.
-* **wasm32-emscripten** ya no está oficialmente soportado.
+.. revealjs-fragments::
+
+    * **PEP 730:** iOS está oficialmente soportado (tier 3).
+    * **PEP 738:** Android está oficialmente soportado (tier 3).
+    * **wasm32-wasi** pasa a ser tier 2.
+    * **wasm32-emscripten** ya no está oficialmente soportado.
 
 .. revealjs-notes::
 
@@ -940,11 +968,11 @@ Python **Málaga**
     :data-transition-speed: slow
     :data-transition: fade
 
-* 🤝 **Meetup:** `Python Málaga <https://www.meetup.com/es-ES/Python-Malaga/>`_.
 * 🌐 **Sitio web:** `python-malaga.es <https://www.python-malaga.es/>`_.
-* 🐦 **Twitter:** `@PythonMalaga <https://twitter.com/python_malaga>`_.
-* ‍💼 **LinkedIn:** `Python Málaga <https://www.linkedin.com/groups/13110576/>`_.
-* 💬 **Telegram:** `Python Málaga <https://t.me/python_malaga>`_.
+* 🤝 **Meetup:** `meetup.com/Python-Malaga <https://www.meetup.com/Python-Malaga/>`_.
+* 🐦 **Twitter:** `@python_malaga <https://twitter.com/python_malaga>`_.
+* ‍💼 **LinkedIn:** `linkedin.com/groups/13110576 <https://www.linkedin.com/groups/13110576/>`_.
+* 💬 **Telegram:** `python_malaga <https://t.me/python_malaga>`_.
 
 .. revealjs-notes::
 

@@ -363,3 +363,26 @@ div[data-background-hash="0linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #2
 	}
 }
 
+/* Typewriter */
+
+@mixin typewriter($steps) {
+  overflow: hidden;
+  white-space: nowrap;
+  border-right: .15em solid #FFD538;
+  margin: 0 auto;
+  //letter-spacing: .15em;
+  animation:
+    typing 2s steps($steps, end),
+    blink-caret .75s step-end infinite;
+
+}
+
+@keyframes typing {
+  from { width: 0 }
+  to { width: 100% }
+}
+
+@keyframes blink-caret {
+  from, to { border-color: transparent }
+  50% { border-color: #FFD538; }
+}
