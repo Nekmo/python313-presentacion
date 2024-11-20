@@ -247,9 +247,9 @@ GIL
 
 .. revealjs-notes::
 
-   El GIL, que como su nombre dice es un lock global enooorme a nivel del intérprete, es el responsable de ir cediendo
-   el control entre los diferentes hilos de Python. Esto tiene cosas buenas, como que es súper fácil programar con
-   concurrencia, porque simplemente no hay una concurrencia real (risas).
+   El GIL, o Global Interpreter Lock, es el responsable de ir cediendo el control entre los diferentes hilos de Python.
+   Esto tiene cosas buenas, como que es súper fácil programar con concurrencia, porque simplemente no hay una
+   concurrencia real (risas).
 
 
 
@@ -686,7 +686,7 @@ Regalos
 
 .. revealjs-notes::
 
-   (1) El nuevo decorador deprecated() de la librería warnings, (2) nos permite marcar funciones, (3) clases
+   (1) El nuevo decorador deprecated() de la biblioteca warnings, (2) nos permite marcar funciones, (3) clases
    (4) o métodos como obsoletos, mostrándose por defecto un mensaje de advertencia cuando se utilizan. (5)
    Adicionalmente, los validadores de tipos como mypy también mostrarán una advertencia.
 
