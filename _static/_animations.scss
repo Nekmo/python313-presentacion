@@ -1,0 +1,388 @@
+/* Waves */
+:root {
+  --waves-color: #4973ff;
+}
+
+.waves {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 300px;
+  background-color: var(--waves-color);
+  box-shadow: inset 0 0 50px rgba(0, 0, 0, 0.5);
+  transition: 500ms;
+}
+
+.waves::before,
+.waves::after {
+  content: '';
+  position: absolute;
+  width: 300vw;
+  height: 300vw;
+  top: -65vw;
+  left: 50%;
+  transform: translate(-50%, -75%);
+}
+
+.waves::before {
+  border-radius: 44%;
+  background: rgba(51, 51, 51, 1);
+  animation: waves 8s linear infinite;
+}
+
+.waves::after {
+  border-radius: 44%;
+  background: rgba(51, 51, 51, 0.5);
+  animation: waves 15s linear infinite;
+}
+
+.slide-background.past, .slide-background.future {
+  .waves {
+    height: 100vh;
+  }
+
+  .waves::before, .waves::after {
+    transition: 1s;
+    top: -100vw;
+  }
+}
+
+@keyframes waves {
+  0% {
+    transform: translate(-50%, -75%) rotate(0deg);
+  }
+
+  100% {
+    transform: translate(-50%, -75%) rotate(360deg);
+  }
+}
+
+/* Bubbles */
+/* Bubbles */
+$bubble-count: 50;
+$sway-type: "sway-left-to-right", "sway-right-to-left";
+
+@function random_range($min, $max) {
+  $rand: random();
+  $random_range: $min + floor($rand * (($max - $min) + 1));
+  @return $random_range;
+}
+
+@function sample($list) {
+  @return nth($list, random(length($list)));
+}
+
+.bubbles {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.bubble {
+  position: absolute;
+  left: var(--bubble-left-offset);
+  bottom: -75%;
+  display: block;
+  width: var(--bubble-radius);
+  height: var(--bubble-radius);
+  border-radius: 50%;
+  animation: float-up var(--bubble-float-duration) var(--bubble-float-delay) ease-in infinite;
+
+  &::before {
+    position: absolute;
+    content: '';
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: hsla(183, 94%, 76%, 0.3);
+    border-radius: inherit;
+    animation: var(--bubble-sway-type) var(--bubble-sway-duration) var(--bubble-sway-delay) ease-in-out alternate infinite;
+  }
+
+  @for $i from 0 through $bubble-count {
+    &:nth-child(#{$i}) {
+      --bubble-left-offset: #{random_range(0vw, 100vw)};
+      --bubble-radius: #{random_range(1vw, 10vw)};
+      --bubble-float-duration: #{random_range(6s, 12s)};
+      --bubble-sway-duration: #{random_range(4s, 6s)};
+      --bubble-float-delay: #{random_range(0s, 4s)};
+      --bubble-sway-delay: #{random_range(0s, 4s)};
+      --bubble-sway-type: #{sample($sway-type)};
+      //--bubble-float-duration: #{random_range(24s, 36s)};
+      //--bubble-sway-duration: #{random_range(4s, 6s)};
+      //--bubble-float-delay: #{random_range(0s, 1s)};
+      //--bubble-sway-delay: #{random_range(0s, 1s)};
+      //--bubble-sway-type: #{sample($sway-type)};
+    }
+  }
+}
+
+@keyframes float-up {
+  to {
+    transform: translateY(-175vh);
+  }
+}
+
+@keyframes sway-left-to-right {
+  from {
+    transform: translateX(-100%);
+  }
+
+  to {
+    transform: translateX(100%);
+  }
+}
+
+@keyframes sway-right-to-left {
+  from {
+    transform: translateX(100%);
+  }
+
+  to {
+    transform: translateX(-100%);
+  }
+}
+
+
+/* Boxes */
+.boxes {
+  background: #4e54c8;
+  background: -webkit-linear-gradient(to left, #8f94fb, #4e54c8);
+  width: 100%;
+  height:100vh;
+
+  .box {
+    position: absolute;
+    display: block;
+    list-style: none;
+    width: 20px;
+    height: 20px;
+    background: rgba(255, 255, 255, 0.2);
+    animation: boxes-animation 25s linear infinite;
+    bottom: -150px;
+  }
+
+  .box:nth-child(1){
+    left: 25%;
+    width: 80px;
+    height: 80px;
+    animation-delay: 0s;
+  }
+
+
+  .box:nth-child(2){
+    left: 10%;
+    width: 20px;
+    height: 20px;
+    animation-delay: 2s;
+    animation-duration: 12s;
+  }
+
+  .box:nth-child(3){
+    left: 70%;
+    width: 20px;
+    height: 20px;
+    animation-delay: 4s;
+  }
+
+  .box:nth-child(4){
+    left: 40%;
+    width: 60px;
+    height: 60px;
+    animation-delay: 0s;
+    animation-duration: 18s;
+  }
+
+  .box:nth-child(5){
+    left: 65%;
+    width: 20px;
+    height: 20px;
+    animation-delay: 0s;
+  }
+
+  .box:nth-child(6){
+    left: 75%;
+    width: 110px;
+    height: 110px;
+    animation-delay: 3s;
+  }
+
+  .box:nth-child(7){
+    left: 35%;
+    width: 150px;
+    height: 150px;
+    animation-delay: 7s;
+  }
+
+  .box:nth-child(8){
+    left: 50%;
+    width: 25px;
+    height: 25px;
+    animation-delay: 15s;
+    animation-duration: 45s;
+  }
+
+  .box:nth-child(9){
+    left: 20%;
+    width: 15px;
+    height: 15px;
+    animation-delay: 2s;
+    animation-duration: 35s;
+  }
+
+  .box:nth-child(10){
+    left: 85%;
+    width: 150px;
+    height: 150px;
+    animation-delay: 0s;
+    animation-duration: 11s;
+  }
+}
+
+@keyframes boxes-animation {
+
+    0%{
+        transform: translateY(0) rotate(0deg);
+        opacity: 1;
+        border-radius: 0;
+    }
+
+    100%{
+        transform: translateY(-1000px) rotate(720deg);
+        opacity: 0;
+        border-radius: 50%;
+    }
+
+}
+
+/* Gray shapes */
+.gray-shapes {
+  .gray-shape {
+    position: fixed;
+
+    background-size: contain;
+    background-repeat: no-repeat;
+
+    animation-name: spin;
+    animation-duration: 50000ms;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+  }
+
+  .gray-shape:nth-child(1) {
+    top: -40vh;
+    left: -40vh;
+    width: 80vh;
+    height: 80vh;
+    background-image: url("shape1.svg");
+  }
+
+  .gray-shape:nth-child(2) {
+    bottom: -30vh;
+    left: -20vh;
+    width: 180vh;
+    height: 180vh;
+    z-index: -1;
+    background-image: url("shape2.svg");
+    animation-duration: 70000ms;
+    animation-direction: reverse;
+  }
+
+  .gray-shape:nth-child(3) {
+    bottom: -10vh;
+    right: -10vh;
+    width: 40vh;
+    height: 40vh;
+    background-image: url("shape3.svg");
+  }
+}
+
+@keyframes spin {
+    from {
+        transform:rotate(0deg);
+    }
+    to {
+        transform:rotate(360deg);
+    }
+}
+
+/* Diagonals */
+
+.diagonals {
+  .diagonal {
+    animation:slide 3s ease-in-out infinite alternate;
+    background-image: linear-gradient(-60deg, #6c3 50%, #09f 50%);
+    bottom:0;
+    left:-50%;
+    opacity:.5;
+    position:fixed;
+    right:-50%;
+    top:0;
+    z-index:-1;
+  }
+
+  .diagonal:nth-child(2) {
+    animation-direction:alternate-reverse;
+    animation-duration:4s;
+  }
+
+  .diagonal:nth-child(3) {
+    animation-duration:5s;
+  }
+
+}
+
+@keyframes slide {
+  0% {
+    transform:translateX(-25%);
+  }
+  100% {
+    transform:translateX(25%);
+  }
+}
+
+/* Colors in movement */
+div[data-background-hash="0linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);nullnullnullnull"] {
+  	background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+	background-size: 400% 400%;
+	animation: gradient 15s ease infinite;
+}
+
+@keyframes gradient {
+	0% {
+		background-position: 0 50%;
+	}
+	50% {
+		background-position: 100% 50%;
+	}
+	100% {
+		background-position: 0 50%;
+	}
+}
+
+/* Typewriter */
+
+@mixin typewriter($steps) {
+  overflow: hidden;
+  white-space: nowrap;
+  border-right: .15em solid #FFD538;
+  margin: 0 auto;
+  //letter-spacing: .15em;
+  animation:
+    typing 2s steps($steps, end),
+    blink-caret .75s step-end infinite;
+
+}
+
+@keyframes typing {
+  from { width: 0 }
+  to { width: 100% }
+}
+
+@keyframes blink-caret {
+  from, to { border-color: transparent }
+  50% { border-color: #FFD538; }
+}

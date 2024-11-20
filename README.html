@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+
+<html lang="es" data-content_root="./">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <title>¿Qué hay de nuevo en Python 3.13?</title>
+    <link rel="stylesheet" type="text/css" href="_static/revealjs/dist/reveal.css?v=40f0a724" />
+    <link rel="stylesheet" href="_static/revealjs/dist/theme/.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/theme.css?v=93e66ea4" />
+    <link rel="stylesheet" type="text/css" href="_static/asciinema-player_3.6.3.css" />
+    <script src="_static/asciinema-player_3.6.3.js"></script>
+    <script src="_static/main.js?v=2c1d3964"></script>
+    <link rel="prev" title="¿Qué hay de nuevo en Python 3.13?" href="index.html" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+  </head><body>
+    <div class="reveal">
+        <div class="slides" role="main">
+            <a class="reference internal image-reference" href="https://raw.githubusercontent.com/Nekmo/python313-presentacion/master/logo.png"><img alt="https://raw.githubusercontent.com/Nekmo/python313-presentacion/master/logo.png" src="https://raw.githubusercontent.com/Nekmo/python313-presentacion/master/logo.png" style="width: 100%;" />
+</a>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<a class="reference external image-reference" href="https://github.com/Nekmo/python313-presentacion/actions?query=workflow%3ABuild"><img alt="Latest CI build status" src="https://img.shields.io/github/actions/workflow/status/Nekmo/python313-presentacion/build.yml?style=flat-square&amp;branch=master" />
+</a>
+<section >
+<section  id="que-hay-de-nuevo-en-python-3-13">
+<h1>¿Qué hay de nuevo en Python 3.13?</h1>
+<p>Lo más nuevo de Python se encuentra a la vuelta de la esquina cargadito de novedades, que veremos en una charla amena y
+concisa con un repaso muy rápidito. Nuevas mejoras en los mensajes de error (¡mejorando todavía más lo ya iniciado en
+versiones anteriores!), un compilador JIT experimental para Python (similar a Numba, con el que podemos lograr más
+velocidad), mejoras en el recolector de basura (aunque primero explicaremos de qué va esto), ¡soporte para iOS!
+¡¡soporte experimental sin GIL!! (sí sí, como lo oís), cambios y mejoras en los módulos de la biblioteca estándar...
+¡No te quedes atrás en lo más nuevo de Python, en esta charla llena de ejemplos de código y mucho humor!</p>
+<p>La presentación está <a class="reference external" href="https://nekmo.github.io/python313-presentacion/">disponible online</a> ya compilada
+para su visualización.</p>
+</section>
+</section>
+<section >
+<section  id="requisitos-y-contenido">
+<h2>Requisitos y contenido</h2>
+<p>Para esta presentación es necesario conocer el lenguaje, pero no las novedades de Python 3.13. Tampoco es necesario un
+nivel avanzado de Python, ya que se explicarán los cambios de una forma sencilla y para todos los públicos. La charla
+se divide en los siguientes apartados:</p>
+<ul class="simple">
+<li><p>Bienvenida e introducción.</p></li>
+<li><p>Comparativa de velocidad.</p></li>
+<li><p>Explicación del GIL.</p></li>
+<li><p>Compilador JIT.</p></li>
+<li><p>Mejoras en la línea de comandos.</p></li>
+<li><p>Mejoras en los mensajes de error.</p></li>
+<li><p>Mejoras en typing.</p></li>
+<li><p>Mejoras en locals().</p></li>
+<li><p>Otros cambios.</p></li>
+<li><p>Eliminaciones.</p></li>
+<li><p>Plataformas soportadas.</p></li>
+<li><p>Punto final a la presentación.</p></li>
+<li><p>Agradecimientos asociaciones, colaboradores y público.</p></li>
+<li><p>Formas de contacto.</p></li>
+<li><p>Turno de preguntas.</p></li>
+</ul>
+</section>
+</section>
+<section >
+<section  id="motivacion">
+<h2>Motivación</h2>
+<p>Aprovechando el lanzamiento de Python 3.13, la comunidad de <a class="reference external" href="https://www.python-malaga.es/">Python Málaga</a> se reúne
+para conocer las novedades de la nueva versión del lenguaje, de una forma amena y divertida. Se profundiza en los
+puntos más importantes, se explica de forma sencilla las partes más complejas y se resuelven las dudas del público,
+todo con ejemplos de código.</p>
+</section>
+</section>
+<section >
+<section  id="acerca-de">
+<h2>Acerca de</h2>
+<p>Esta charla pertenece a una serie realizada por la asociación Python Málaga, la cual realiza cada año desde Python 3.11
+con el fin de conocer las novedades del lenguaje. Las dos charlas anteriores se encuentras disponibles en:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://github.com/Nekmo/python312-presentacion">https://github.com/Nekmo/python312-presentacion</a></p></li>
+<li><p><a class="reference external" href="https://github.com/Nekmo/python311-presentacion">https://github.com/Nekmo/python311-presentacion</a></p></li>
+</ul>
+<p>La presente charla ha sido realizada para <a class="reference external" href="https://www.python-malaga.es/">Python Málaga</a>, con fecha de presentación
+el 14 de noviembre de 2024 junto con <a class="reference external" href="https://www.meetup.com/es/PyData-Malaga/">PyData Málaga</a> y en colaboración
+con <a class="reference external" href="https://www.plytix.com/">Plytix</a>.</p>
+</section>
+</section>
+<section >
+<section  id="compilacion">
+<h2>Compilación</h2>
+<p>Para compilar desde el código fuente se requiere Python 3 instalado, estando probado sólo bajo Python 3.12. Se
+recomienda ejecutar los siguientes pasos en un
+<a class="reference external" href="https://nekmo.com/es/blog/python-virtualenvs-y-virtualenvwrapper/">virtualenv</a>:</p>
+<pre data-id="compilacion"><code data-trim data-noescape class="default"># Clonar proyecto
+git clone https://github.com/Nekmo/python313-presentacion.git
+cd python313-presentacion
+# Instalar dependencias
+pip install -r requirements.txt
+# Compilar ficheros de estilos
+sassc _static/theme.scss _static/theme.css
+# Compilar presentación
+make revealjs</code></pre>
+<p>Tras la compilación puede verse los ficheros resultantes en el directorio <code class="docutils literal notranslate"><span class="pre">_build</span></code>.</p>
+</section>
+<section  id="copyright">
+<h3>Copyright</h3>
+<p>Licencia MIT. Ver fichero <code class="docutils literal notranslate"><span class="pre">LICENSE.txt</span></code>.</p>
+<p>Nekmo 2024.</p>
+</section>
+</section>
+
+        </div>
+    </div>
+    
+    <script src="_static/revealjs/dist/reveal.js"></script>
+    
+    
+      <script src="_static/revealjs/plugin/notes/notes.js"></script>
+      <script src="_static/revealjs/plugin/highlight/highlight.js"></script>
+      
+    
+    <script>
+        var revealjsConfig = new Object();
+        Object.assign(revealjsConfig, {"controls": true, "progress": true, "history": true, "center": true, "margin": 0.2, "transition": "slide", "scrollActivationWidth": null});
+        
+        
+        
+          revealjsConfig.plugins = [
+            RevealNotes,RevealHighlight,
+          ];
+        
+        // More info https://github.com/hakimel/reveal.js#configuration
+        Reveal.initialize(revealjsConfig);
+    </script>
+
+  </body>
+</html>
